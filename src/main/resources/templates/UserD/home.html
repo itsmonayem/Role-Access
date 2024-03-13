@@ -20,6 +20,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Application Content</th>
+                    <th>Comments</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -28,6 +29,23 @@
                 <tr th:each="app: ${applicationList}">
                     <th scope="row" th:text="${app.id}"></th>
                     <td th:text="${app.content}"></td>
+                    <td>
+                        <table class="table table-sm">
+                            <thead>
+                            <tr>
+                                <th>status</th>
+                                <th>action taken by</th>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+                            <tr th:each="history: ${app.getHistories()}">
+                                <td th:text="| ${history.getAction()} |"></td>
+                                <td th:text="| ${history.getAction_taken_by().getName()} |"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
                     <td th:text="${app.status}"></td>
                     <td th:if="${#strings.toString(app.status)} == 'APPROVED_BY_USER_C'">
                         <a class="btn btn-sm bg-primary" th:href="@{'/user-D/accept/'+${app.id}}">Complete</a>

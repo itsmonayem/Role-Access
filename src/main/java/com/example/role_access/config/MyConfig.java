@@ -45,6 +45,11 @@ public class MyConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz
+                        .requestMatchers("admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user-A/**").hasRole("USER_A")
+                        .requestMatchers("/user-B/**").hasRole("USER_B")
+                        .requestMatchers("/user-C/**").hasRole("USER_C")
+                        .requestMatchers("/user-D/**").hasRole("USER_D")
                         .anyRequest().authenticated()
                 ).formLogin(Customizer.withDefaults())
                 .formLogin(form ->

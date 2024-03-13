@@ -18,7 +18,7 @@ public class ApplicationHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Status action;
-    @OneToOne
+    @ManyToOne
     private User Action_taken_by;
     private LocalTime time;
 
